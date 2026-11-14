@@ -1831,7 +1831,10 @@ const EN = {
   "ผู้มาติดต่อยังอยู่ในอาคาร": "Visitor still in the building",
   "มีหลักฐานการชำระรอตรวจสอบ": "Payment slip awaiting review",
   "กรุณาแนบหลักฐานการโอนเงิน": "Please attach the transfer slip",
+  "จองสิ่งอำนวยความสะดวกได้ไม่เกิน 1 ครั้งต่อวันต่อสถานที่": "Limit 1 booking per facility per day",
+  "คุณจองสถานที่นี้ในวันที่เลือกแล้ว (จำกัด 1 ครั้ง/วัน)": "You already booked this facility for the selected date (limit 1/day)",
   "คุณจองช่วงเวลานี้ไว้แล้ว": "You already booked this slot",
+  "จำกัด 1 ครั้ง/วัน": "Limit 1/day",
   "ดูรายงานและสรุปยอดต่าง ๆ": "Reports & summaries",
   "บัญชีทดลอง (ข้อมูลสมมติ)": "Demo accounts (fictional data)",
   "รีเซ็ตข้อมูลตัวอย่างแล้ว": "Sample data reset",
@@ -3223,6 +3226,12 @@ V["2.1"] = {
     const f = sel.book || { fac: db.facilities[0].Facility_ID, date: today() };
     const fac = facById(f.fac) || db.facilities[0];
     const used = s => db.bookings.filter(b => b.Facility_ID === fac.Facility_ID && b.date === f.date && b.slot === s && b.status !== "ยกเลิก").length;
+    const bookedToday = db.bookings.find(b =>
+      (b.User_ID === me.User_ID || (me.Unit_ID && b.Unit_ID === me.Unit_ID)) &&
+      b.Facility_ID === fac.Facility_ID &&
+      b.date === f.date &&
+      b.status !== "ยกเลิก"
+    );
     const sl = slots(fac);
 
     return '<div class="grid2"><form class="panel f" data-form="2.1" data-live="1"><h2 style="grid-column:1/-1">' + ico("calplus") + T("ขอใช้สิ่งอำนวยความสะดวก") + '</h2>' +
@@ -3232,7 +3241,8 @@ V["2.1"] = {
         const u = used(s);
         return opt(s, s + (u >= fac.capacity ? " · " + T("เต็ม") : " · " + T("ว่าง") + " " + (fac.capacity - u)), f.slot);
       }).join("")), true) +
-      '<div class="actions"><button class="btn" type="submit">' + ico("check") + T("ยืนยันการจอง") + '</button><span class="muted" style="font-size:0.82rem">' + T("เปิด") + " " + esc(fac.open) + "–" + esc(fac.close) + " น. · " + T("รับได้") + " " + fac.capacity + " " + T("ห้องต่อช่วงเวลา") + '</span></div></form>' +
+      (bookedToday ? '<div class="err fld wide">' + T("คุณจองสถานที่นี้ในวันที่เลือกแล้ว (จำกัด 1 ครั้ง/วัน)") + " (" + esc(bookedToday.Booking_ID) + " · " + esc(bookedToday.slot) + ')</div>' : '') +
+      '<div class="actions"><button class="btn" type="submit"' + (bookedToday ? " disabled" : "") + '>' + ico("check") + T("ยืนยันการจอง") + '</button><span class="muted" style="font-size:0.82rem">' + T("เปิด") + " " + esc(fac.open) + "–" + esc(fac.close) + " น. · " + T("รับได้") + " " + fac.capacity + " " + T("ห้องต่อช่วงเวลา") + " · " + T("จำกัด 1 ครั้ง/วัน") + '</span></div></form>' +
       '<section class="panel"><h2>' + ico("calendar") + T("การจองของฉัน") + '</h2>' + myBookings(false) + '</section></div>';
   }
 };
@@ -3435,11 +3445,11 @@ H["2.1"] = (fd, form, live) => {
   const n = db.bookings.filter(b => b.Facility_ID === f.fac && b.date === f.date && b.slot === f.slot && b.status !== "ยกเลิก").length;
   if (n >= fac.capacity) {
     toast(T("ช่วงเวลานี้เต็มแล้ว กรุณาเลือกช่วงอื่น"), "bad");
-    return;
+    return false;
   }
-  if (db.bookings.find(b => b.User_ID === me.User_ID && b.Facility_ID === f.fac && b.date === f.date && b.slot === f.slot && b.status !== "ยกเลิก")) {
-    toast(T("คุณจองช่วงเวลานี้ไว้แล้ว"), "bad");
-    return;
+  if (db.bookings.find(b => (b.User_ID === me.User_ID || (me.Unit_ID && b.Unit_ID === me.Unit_ID)) && b.Facility_ID === f.fac && b.date === f.date && b.status !== "ยกเลิก")) {
+    toast(T("จองสิ่งอำนวยความสะดวกได้ไม่เกิน 1 ครั้งต่อวันต่อสถานที่"), "bad");
+    return false;
   }
   const id = nextId("BK", db.bookings, "Booking_ID");
   db.bookings.push({

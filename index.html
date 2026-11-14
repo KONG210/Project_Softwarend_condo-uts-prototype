@@ -1503,7 +1503,8 @@ const ICON = {
   "okbig": '<path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/>',
   "droplet": '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
   "zap": '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
-  "qr": '<rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>',
+  "landmark": '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  "copy": '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
   "sun": '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
   "moon": '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
   "up": '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
@@ -1568,13 +1569,13 @@ function seed() {
     { Invoice_ID: "INV-6911-001", Unit_ID: "A-101", User_ID: "USR002", round: "2026-11", common: 1120, water: 288, elec: 1561, other: 0, total: 2969, status: "ยังไม่ชำระ" }
   ];
   d.payments = [
-    { Payment_ID: "PAY001", Invoice_ID: "INV-6909-001", at: "2026-10-05T19:12", channel: "QR PromptPay", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY002", Invoice_ID: "INV-6909-002", at: "2026-10-06T08:40", channel: "โอนผ่านธนาคาร", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY003", Invoice_ID: "INV-6909-003", at: "2026-10-03T12:05", channel: "QR PromptPay", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY004", Invoice_ID: "INV-6909-004", at: "2026-10-07T21:30", channel: "QR PromptPay", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY005", Invoice_ID: "INV-6910-001", at: "2026-11-01T18:20", channel: "QR PromptPay", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY006", Invoice_ID: "INV-6910-003", at: "2026-11-02T10:15", channel: "QR PromptPay", slip: "", verify: "อนุมัติ" },
-    { Payment_ID: "PAY007", Invoice_ID: "INV-6910-002", at: "2026-11-04T20:48", channel: "โอนผ่านธนาคาร", slip: "", verify: "รอตรวจสอบ" }
+    { Payment_ID: "PAY001", Invoice_ID: "INV-6909-001", at: "2026-10-05T19:12", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY002", Invoice_ID: "INV-6909-002", at: "2026-10-06T08:40", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY003", Invoice_ID: "INV-6909-003", at: "2026-10-03T12:05", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY004", Invoice_ID: "INV-6909-004", at: "2026-10-07T21:30", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY005", Invoice_ID: "INV-6910-001", at: "2026-11-01T18:20", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY006", Invoice_ID: "INV-6910-003", at: "2026-11-02T10:15", slip: "", verify: "อนุมัติ" },
+    { Payment_ID: "PAY007", Invoice_ID: "INV-6910-002", at: "2026-11-04T20:48", slip: "", verify: "รอตรวจสอบ" }
   ];
   d.meters = [
     { Meter_ID: "MT001", Unit_ID: "A-101", type: "น้ำ", prev: 1204, curr: 1220, date: "2026-11-01" },
@@ -1774,7 +1775,14 @@ const EN = {
   "จะหายไปจากหน้าประกาศของผู้อยู่อาศัยทุกคน": "will disappear from every resident's announcements",
   "จะถูกลบออกจาก D1 และเข้าสู่ระบบไม่ได้อีก": "will be removed from D1 and can no longer sign in",
   "ช่วงเวลานี้เต็มแล้ว กรุณาเลือกช่วงอื่น": "This time slot is full. Please choose another",
-  "ตัวอย่างสำหรับต้นแบบ ใช้ชำระจริงไม่ได้": "sample for the prototype — not a real payment code",
+  "ตัวอย่างสำหรับต้นแบบ ใช้ชำระจริงไม่ได้": "sample for the prototype — not for real payment",
+  "นิติบุคคลอาคารชุด Condo UTS": "Condo UTS Juristic Person",
+  "ธนาคารกสิกรไทย (KBank)": "Kasikornbank (KBank)",
+  "คัดลอกเลขที่บัญชีแล้ว": "Account number copied",
+  "เลขที่บัญชี": "Account no.",
+  "ชื่อบัญชี": "Account name",
+  "ธนาคาร": "Bank",
+  "คัดลอก": "Copy",
   "หมายเลขใบแจ้งหนี้และหลักฐานการโอนเงิน": "Invoice no. and transfer slip",
   "ข้อมูลเก็บในเบราว์เซอร์ของคุณเท่านั้น": "Data is stored only in your browser",
   "หมายเลขห้อง (ไม่กรอกจะใช้จาก Unit_ID)": "Room no. (taken from Unit_ID if blank)",
@@ -2325,30 +2333,12 @@ function resizeImage(file) {
   });
 }
 
-function qrPattern(seedStr) {
-  const n = 25, c = document.createElement("canvas");
-  c.width = n; c.height = n;
-  const x = c.getContext("2d");
-  x.fillStyle = "#fff"; x.fillRect(0, 0, n, n);
-  x.fillStyle = "#0f172a";
-  let h = 0;
-  for (const ch of seedStr) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  const rnd = () => { h ^= h << 13; h >>>= 0; h ^= h >> 17; h ^= h << 5; h >>>= 0; return h / 4294967296; };
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      if (rnd() > 0.52) x.fillRect(i, j, 1, 1);
-    }
-  }
-  const finder = (a, b) => {
-    x.fillStyle = "#0f172a"; x.fillRect(a, b, 7, 7);
-    x.fillStyle = "#fff"; x.fillRect(a + 1, b + 1, 5, 5);
-    x.fillStyle = "#0f172a"; x.fillRect(a + 2, b + 2, 3, 3);
-  };
-  x.fillStyle = "#fff";
-  x.fillRect(0, 0, 8, 8); x.fillRect(n - 8, 0, 8, 8); x.fillRect(0, n - 8, 8, 8);
-  finder(0, 0); finder(n - 7, 0); finder(0, n - 7);
-  return c.toDataURL();
-}
+const BANK_ACCOUNT = {
+  bank: "ธนาคารกสิกรไทย (KBank)",
+  no: "048-3-92841-6",
+  raw: "0483928416",
+  name: "นิติบุคคลอาคารชุด Condo UTS"
+};
 
 /* ---------- Navigation Spec ---------- */
 const NAV = {
@@ -3189,10 +3179,23 @@ V["1.2"] = {
       fld(T("วันเวลาที่ชำระ"), inp("at", savedAt, "datetime-local", "required")) +
       imgInput("slip", T("หลักฐานการโอนเงิน (รูปสลิป)"), savedSlip) +
       '<div class="form-err"></div><div class="actions"><button class="btn ok" type="submit">' + ico("check") + T("ยืนยัน") + '</button></div></form>' +
-      '<section class="panel" style="display:grid;gap:14px;justify-items:center;text-align:center"><h2>' + ico("qr") + T("ยอดที่ต้องชำระ") + '</h2>' +
-      '<div class="stat" style="width:100%"><span class="k">' + esc(cur.Invoice_ID) + " · " + T("รอบบิล") + " " + esc(monthLabel(cur.round)) + '</span><span class="v" style="color:var(--accent)">' + money(cur.total) + ' <small>' + T("บาท") + '</small></span></div>' +
-      '<img class="qr" alt="PromptPay QR" src="' + qrPattern(cur.Invoice_ID) + '" style="width:180px;height:180px;border-radius:14px;padding:8px;background:#fff;box-shadow:var(--shadow-2)">' +
-      '<p class="muted" style="margin:0;font-size:0.82rem">' + T("ตัวอย่างสำหรับต้นแบบ ใช้ชำระจริงไม่ได้") + '</p></section></div>' :
+      '<section class="panel" style="display:grid;gap:14px"><h2>' + ico("landmark") + T("ยอดที่ต้องชำระ") + '</h2>' +
+      '<div class="stat" style="width:100%;text-align:center"><span class="k">' + esc(cur.Invoice_ID) + " · " + T("รอบบิล") + " " + esc(monthLabel(cur.round)) + '</span><span class="v" style="color:var(--accent)">' + money(cur.total) + ' <small>' + T("บาท") + '</small></span></div>' +
+      '<div style="display:grid;gap:10px;padding:16px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line)">' +
+        '<div style="display:grid;gap:4px;justify-items:start">' +
+          '<span class="muted" style="font-size:0.78rem">' + T("โอนผ่านธนาคาร") + '</span>' +
+          '<span class="pill info">' + T(BANK_ACCOUNT.bank) + '</span>' +
+        '</div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;border-radius:var(--r-sm);background:var(--sunk);border:1px solid var(--line-2)">' +
+          '<div><div class="muted" style="font-size:0.78rem">' + T("เลขที่บัญชี") + '</div><div class="mono" style="font-size:1.22rem;font-weight:700;letter-spacing:0.06em;color:var(--ink)">' + esc(BANK_ACCOUNT.no) + '</div></div>' +
+          '<button class="btn ghost sm" type="button" data-act="copyAcc" data-id="' + esc(BANK_ACCOUNT.raw) + '">' + ico("copy") + T("คัดลอก") + '</button>' +
+        '</div>' +
+        '<div style="display:grid;gap:2px">' +
+          '<span class="muted" style="font-size:0.78rem">' + T("ชื่อบัญชี") + '</span>' +
+          '<b style="font-size:0.94rem">' + T(BANK_ACCOUNT.name) + '</b>' +
+        '</div>' +
+      '</div>' +
+      '<p class="muted" style="margin:0;font-size:0.82rem;text-align:center">' + T("ตัวอย่างสำหรับต้นแบบ ใช้ชำระจริงไม่ได้") + '</p></section></div>' :
       '<section class="panel"><h2>' + ico("check") + T("ไม่มีใบแจ้งหนี้ที่ยังไม่ชำระ") + '</h2><p class="muted">' + T("ใบแจ้งหนี้ที่ส่งหลักฐานแล้วจะอยู่ในสถานะรอตรวจสอบ") + '</p></section>') +
       '<section class="panel"><h2>' + ico("history") + T("ประวัติการแจ้งชำระ") + '</h2>' +
       table([
@@ -3404,7 +3407,6 @@ H["1.2"] = (fd, form, live) => {
     Payment_ID: id,
     Invoice_ID: inv.Invoice_ID,
     at: fd.get("at") || nowLocal(),
-    channel: fd.get("channel"),
     slip: slipImg,
     verify: "รอตรวจสอบ"
   });
@@ -3853,6 +3855,25 @@ const A = {
   payInv(id) {
     sel.pay = id;
     go("1.2");
+    return "noop";
+  },
+  copyAcc(id) {
+    const done = () => toast(T("คัดลอกเลขที่บัญชีแล้ว") + " (" + BANK_ACCOUNT.no + ")");
+    const fallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = id;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+      ta.remove();
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(id).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
     return "noop";
   },
   editUser(id) {

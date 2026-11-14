@@ -1867,7 +1867,6 @@ const EN = {
   "ตรวจสอบการชำระเงิน": "Verify payments",
   "มีผู้เช่า ลบไม่ได้": "Occupied — can't delete",
   "กลับเป็นยังไม่ชำระ": "returned to Unpaid",
-  "ช่องทางการชำระเงิน": "Payment channel",
   "ตัวอย่างใบแจ้งหนี้": "Invoice preview",
   "ไม่อนุมัติการชำระ": "Reject payment",
   "ค่าส่วนกลาง (บาท)": "Common fee (THB)",
@@ -2623,7 +2622,6 @@ V["1.3"] = {
       { h: T("ห้อง"), v: p => '<span class="mono pill info">' + esc(inv(p.Invoice_ID).Unit_ID || "-") + '</span>' },
       { h: T("ยอด"), cls: "r", v: p => money(inv(p.Invoice_ID).total) },
       { h: T("วันเวลาที่ชำระ"), v: p => esc(fmtDT(p.at)) },
-      { h: T("ช่องทาง"), v: p => esc(p.channel) },
       { h: T("หลักฐาน"), v: p => p.slip ? '<button class="btn ghost sm" data-act="slip" data-id="' + esc(p.Payment_ID) + '">' + ico("eye") + T("ดูสลิป") + '</button>' : '<span class="muted">-</span>' },
       { h: T("สถานะ"), v: p => pill(p.verify) },
       ...(act ? [{
@@ -3188,7 +3186,6 @@ V["1.2"] = {
 
     return (cur ? '<div class="grid2"><form class="panel f" data-form="1.2" data-live="1"><h2 style="grid-column:1/-1">' + ico("wallet") + T("แจ้งชำระเงิน") + '</h2>' +
       fld(T("หมายเลขใบแจ้งหนี้"), selBox("inv", due.map(i => opt(i.Invoice_ID, i.Invoice_ID + " · " + monthLabel(i.round) + " · " + money(i.total) + " " + T("บาท"), cur.Invoice_ID)).join("")), true) +
-      fld(T("ช่องทางการชำระเงิน"), selBox("channel", opt("QR PromptPay", "QR PromptPay") + opt("โอนผ่านธนาคาร", T("โอนผ่านธนาคาร")))) +
       fld(T("วันเวลาที่ชำระ"), inp("at", savedAt, "datetime-local", "required")) +
       imgInput("slip", T("หลักฐานการโอนเงิน (รูปสลิป)"), savedSlip) +
       '<div class="form-err"></div><div class="actions"><button class="btn ok" type="submit">' + ico("check") + T("ยืนยัน") + '</button></div></form>' +
@@ -3202,7 +3199,6 @@ V["1.2"] = {
         { h: "Payment_ID", v: p => '<span class="mono">' + esc(p.Payment_ID) + '</span>' },
         { h: "Invoice_ID", v: p => '<span class="mono">' + esc(p.Invoice_ID) + '</span>' },
         { h: T("วันเวลาที่ชำระ"), v: p => esc(fmtDT(p.at)) },
-        { h: T("ช่องทาง"), v: p => esc(p.channel) },
         { h: T("หลักฐาน"), v: p => p.slip ? '<button class="btn ghost sm" data-act="slip" data-id="' + esc(p.Payment_ID) + '">' + ico("eye") + T("ดูสลิป") + '</button>' : '<span class="muted">-</span>' },
         { h: T("สถานะ"), v: p => pill(p.verify) }
       ], mine) + '</section>';
